@@ -6,7 +6,7 @@ class Application
     if req.path.match(/items/)
       item_name = req.path.split("/items/").last
 
-      if @@items.find { |i| i.name == item_name }
+      if @@items.find { |i| i.name == item_name } #if this item name is equal to the item name they gave us above in item_name
         item = @@items.find { |i| i.name == item_name }
         resp.write item.price
       else
