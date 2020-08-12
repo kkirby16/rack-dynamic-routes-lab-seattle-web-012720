@@ -1,13 +1,14 @@
 class Application
+  @@items = [Item.new("Figs", 3.42), Item.new("Pears", 0.99)]
+
   def call(env)
     resp = Rack::Response.new
     req = Rack::Request.new(env)
 
     if req.path.match(/items/)
       item_name = req.path.split("/items/").last
-
-      if @@items.find { |i| i.name == item_name } #if this item name is equal to the item name they gave us above in item_name
-        item = @@items.find { |i| i.name == item_name }
+      item = @@items.find { |i| i.name == item_name }
+      if item != nil
         resp.write item.price
       else
         resp.write "Item not found"
